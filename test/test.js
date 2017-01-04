@@ -163,7 +163,9 @@ describe('BlogPost API resource', function() {
         .then(function(posts) {
           posts.title.should.equal(newBlogPost.title);
           posts.content.should.equal(newBlogPost.content);
-          posts.author.should.equal(newBlogPost.author);
+          posts.author.firstName.should.equal(newBlogPost.author.firstName);
+          posts.author.lastName.should.equal(newBlogPost.author.lastName);
+
         });
     });
   });

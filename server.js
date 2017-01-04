@@ -50,8 +50,10 @@ app.post('/posts', (req, res) => {
     .create({
       title: req.body.title,
       content: req.body.content,
-      author.firstName: req.body.author.firstName,
-      author.lastName: req.body.author.lastName
+      author: {
+        firstName: req.body.author.firstName,
+        lastName: req.body.author.lastName
+      }
     })
     .then(blogPost => res.status(201).json(blogPost.apiRepr()))
     .catch(err => {
