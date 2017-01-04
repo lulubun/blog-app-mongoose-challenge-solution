@@ -50,7 +50,8 @@ app.post('/posts', (req, res) => {
     .create({
       title: req.body.title,
       content: req.body.content,
-      author: req.body.author
+      author.firstName: req.body.author.firstName,
+      author.lastName: req.body.author.lastName
     })
     .then(blogPost => res.status(201).json(blogPost.apiRepr()))
     .catch(err => {
@@ -84,7 +85,7 @@ app.put('/posts/:id', (req, res) => {
 
   const updated = {};
   const updateableFields = ['title', 'content', 'author'];
-  updateableFields.forEach(field => {
+  updateableFields.forEach(field => { 
     if (field in req.body) {
       updated[field] = req.body[field];
     }
@@ -99,7 +100,7 @@ app.put('/posts/:id', (req, res) => {
 
 
 app.delete('/:id', (req, res) => {
-  BlogPosts
+  BlogPost
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
