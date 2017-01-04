@@ -69,7 +69,7 @@ app.delete('/posts/:id', (req, res) => {
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      res.status(204).json({message: 'success'});
+      res.status(201).json({message: 'success'});
     })
     .catch(err => {
       console.error(err);
@@ -107,7 +107,7 @@ app.delete('/:id', (req, res) => {
     .exec()
     .then(() => {
       console.log(`Deleted blog post with id \`${req.params.ID}\``);
-      res.status(204).end();
+      res.status(201).end();
     });
 });
 
