@@ -116,8 +116,8 @@ describe('BlogPost API resource', function() {
           res.body.should.have.length.of.at.least(1);
 
           res.body.forEach(function(posts) {
-            should.be.an('object');
-            should.include.keys(
+            posts.should.be.an('object');
+            posts.should.include.keys(
               'id', 'title', 'content', 'author');
           });
           resBlogPost = res.body[0];
@@ -125,11 +125,10 @@ describe('BlogPost API resource', function() {
         })
         .then(function(posts) {
           //removed post.from () may need to undo
-          resBlogPost.id.should.equal(id);
-          resBlogPost.title.should.equal(title);
-          resBlogPost.content.should.equal(content);
-          resBlogPost.author.firstName.should.equal(author.firstName);
-          resBlogPost.author.lastName.should.equal(author.lastName);
+          resBlogPost.id.should.equal(posts.id);
+          resBlogPost.title.should.equal(posts.title);
+          resBlogPost.content.should.equal(posts.content);
+          resBlogPost.author.should.equal(posts.author);
         });
     });
   });
@@ -156,9 +155,7 @@ describe('BlogPost API resource', function() {
           res.body.id.should.not.be.null;
           res.body.title.should.equal(newBlogPost.title);
           res.body.content.should.equal(newBlogPost.content);
-          res.body.author.firstName.should.equal(newBlogPost.author.firstName);
-          res.body.author.lastName.should.equal(newBlogPost.author.lastName);
-          return BlogPost.findById(res.body.id);
+          res.body.author.should.equal(newBlogPost.author);          return BlogPost.findById(res.body.id);
         })
         .then(function(posts) {
           posts.title.should.equal(newBlogPost.title);
