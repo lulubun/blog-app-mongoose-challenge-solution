@@ -128,7 +128,7 @@ describe('BlogPost API resource', function() {
           resBlogPost.id.should.equal(posts.id);
           resBlogPost.title.should.equal(posts.title);
           resBlogPost.content.should.equal(posts.content);
-          resBlogPost.author.should.equal(posts.author);
+          resBlogPost.author.should.equal(posts.author.firstName + " " + posts.author.lastName);
         });
     });
   });
@@ -155,7 +155,8 @@ describe('BlogPost API resource', function() {
           res.body.id.should.not.be.null;
           res.body.title.should.equal(newBlogPost.title);
           res.body.content.should.equal(newBlogPost.content);
-          res.body.author.should.equal(newBlogPost.author);          return BlogPost.findById(res.body.id);
+          res.body.author.should.equal(newBlogPost.author.firstName + " " + newBlogPost.author.lastName);          
+          return BlogPost.findById(res.body.id);
         })
         .then(function(posts) {
           posts.title.should.equal(newBlogPost.title);
